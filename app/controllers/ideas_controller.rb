@@ -14,9 +14,10 @@ class IdeasController < ApplicationController
   def show
     @idea = Idea.find params[:id]
     @review = Review.new
-    @user = current_user
+    # @idea.user = current_user
 
   end
+
 
   def create
       idea_params = params.require(:idea).permit([:title, :body, :name])
@@ -30,9 +31,40 @@ class IdeasController < ApplicationController
       end
   end
 
+  def edit
+    # redirect_to root_path, alert: 'Cannot edit idea; access denied'
+    #   unless can_edit_idea?(@idea)
+    #   end
+    @idea = Idea.find params[:id]
+    redirect_to root_path, alert: 'access denied' unless can? :edit, @idea
+  end
+
+  def update
+    @idea = Idea.find(params[:id])
+    idea_params = params.require(:idea).permit([:title, :body, :name])
+
+    if !(can? :edit, @idea)
+      redirect_to root_path, alert: 'Cannot update idea; access denied'
+    elsif @idea.update(idea_params)
+      redirect_to idea_path(@idea),
+      notice: 'Idea updated'
+    else
+      render :edit
+    end
+  end
+
   def destroy
-    idea = Comment.find(params[:id])
-    idea.destroy
-    redirect_to idea_path(idea), notice: 'Comment deleted!'
+    @idea = Idea.find params[:id]
+    # idea.destroy
+
+    # local variable because only redirecting
+    # only need instance variables if sharing with a template
+    if can? :destroy, @idea
+      @idea.destroy
+      redirect_to ideas_path, notice: 'Idea deleted'
+    else
+      redirect_to root_path, alert: 'access denied'
+    end
+    # render plain: 'in ideas destroy'
   end
 end

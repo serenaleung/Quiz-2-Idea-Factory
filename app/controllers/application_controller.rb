@@ -1,15 +1,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :click, only: :index
 
   def authenticate_user!
   if !user_signed_in?
     redirect_to new_session_path, notice: "You must be signed in!"
   end
-
   # unless user_signed_in?
   #   flash[:notice] = "Please sign in"
   #   redirect_to new_session_path
   # end
+
+
+
 end
 helper_method :authenticate_user!
 
@@ -23,8 +26,19 @@ def current_user
 end
 helper_method :current_user
 
-def can_edit_post?(post)
-  user_signed_in? && (post.user == current_user)
+def can_edit_idea?(idea)
+  user_signed_in? && (idea.user == current_user)
 end
-helper_method :can_edit_post?
+helper_method :can_edit_idea?
+
+def index
+  @clicks = Click.sum
+ end
+
+private
+
+   def click
+      Click.create
+   end
+
 end

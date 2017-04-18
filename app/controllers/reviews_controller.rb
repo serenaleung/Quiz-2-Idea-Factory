@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
     review_params = params.require(:review).permit(:body)
     @review = Review.new(review_params)
     @review.idea = @idea
+    @review.user = current_user
 
     # @review = @idea.reviews.build(review_params)
     if @review.save
@@ -16,6 +17,10 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    review = Review.find(params[:id])
+    idea = review.idea
+    review.destroy
+    redirect_to idea_path(idea), notice: 'Review deleted!'
   end
 
   private

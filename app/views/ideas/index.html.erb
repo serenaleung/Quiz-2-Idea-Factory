@@ -3,6 +3,17 @@
 <% @ideas.each do |i| %>
         <h2><%= link_to i.title, i %></h2>
         <p><%= truncate(i.body, length: 1500) %></p>
-        <h5>By <%= link_to i.name %></h5>
+        <h5>By <%= link_to i.user.first_name %></h5>
+        <br>
+        <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+          Join
+        <% end %>
+        <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+          Like
+        <% end %>
+
+        <div class="float-right">
+          Member: <%= @member_count %>| Likes: <%= @like_count %>
+        </div>
         <hr>
       <% end %>
