@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
-
+  # before_action :find_idea, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
   # before_action :authenticate_user!, only: [:create, :destroy]
 
   def index
@@ -13,12 +14,14 @@ class IdeasController < ApplicationController
   def show
     @idea = Idea.find params[:id]
     @review = Review.new
+    @user = current_user
+
   end
 
   def create
       idea_params = params.require(:idea).permit([:title, :body, :name])
       @idea = Idea.new idea_params
-      # @idea.user = current_user
+      @idea.user = current_user
 
       if @idea.save
         redirect_to idea_path(@idea)

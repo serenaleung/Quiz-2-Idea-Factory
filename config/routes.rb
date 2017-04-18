@@ -17,6 +17,12 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create, :destroy]
   end
 
+  resources :users, only: [:new, :create]
+  # prevents password to show in address bar
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+  end
+
   root 'ideas#index'
 
 end
