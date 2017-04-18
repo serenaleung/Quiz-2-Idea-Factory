@@ -12,6 +12,7 @@ class IdeasController < ApplicationController
 
   def show
     @idea = Idea.find params[:id]
+    @review = Review.new
   end
 
   def create
