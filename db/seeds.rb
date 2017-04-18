@@ -15,3 +15,14 @@
     )
   end
   puts "Comments Created"
+
+  ideas = Idea.all
+  ideas.each do |i|
+    rand(0..6).times do
+      i.reviews.create({
+        body: Faker::Lorem.paragraph(8, false, 5)
+        })
+    end
+  end
+
+  reviews_count = Review.count
