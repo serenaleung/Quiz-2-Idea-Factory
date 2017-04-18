@@ -15,7 +15,7 @@ class IdeasController < ApplicationController
   end
 
   def create
-      idea_params = params.require(:idea).permit([:title, :description, :price, :category_id])
+      idea_params = params.require(:idea).permit([:title, :body, :name])
       @idea = Idea.new idea_params
       # @idea.user = current_user
 
