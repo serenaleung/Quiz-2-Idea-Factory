@@ -1,1 +1,8 @@
 <h1>Ideas Generator</h1>
+
+<% @ideas.each do |i| %>
+        <h2><%= link_to i.title, i %></h2>
+        <p><%= truncate(i.body, length: 1500) %></p>
+        <h5>By <%= link_to i.name %></h5>
+        <hr>
+      <% end %>

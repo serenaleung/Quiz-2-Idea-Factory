@@ -1,0 +1,22 @@
+<div class="">
+
+      <h5><%#= link_to(@idea.category.title.upcase , category_path(@idea.category.id)) %></h5>
+
+      <h2><%= @idea.title%></h2>
+      <p><%= @idea.body %></p>
+      <h5>By <%= link_to @idea.name %></h5>
+      <hr>
+
+
+
+      <%# if can? :edit, @idea %>
+        <%#= link_to 'Edit', edit_idea_path(@idea) %>
+      <%# end %>
+
+      <%#= if can? :destroy, @idea %>
+        <%#= link_to 'Delete', idea_path(@idea),
+                              method: :delete,
+                              data: { confirm: 'Are you sure?' } %>
+      <%# end %>
+
+</div>
