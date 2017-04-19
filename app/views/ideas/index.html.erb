@@ -1,19 +1,44 @@
 <h1>Ideas Generator</h1>
-
 <% @ideas.each do |i| %>
-        <h2><%= link_to i.title, i %></h2>
-        <p><%= truncate(i.body, length: 1500) %></p>
-        <h5>By <%= link_to i.user.first_name %></h5>
-        <br>
-        <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-          Join
-        <% end %>
-        <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-          Like
-        <% end %>
+          <div class="row">
+            <div class="col-md-10">
+              <h2><%= link_to i.title, i, { class: 'myModal' } %> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">+</button></h2>
 
-        <div class="float-right">
-          Member: <%= @member_count %>| Likes: <%= @like_count %>
-        </div>
+              <!-- Modal -->
+              <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p><%= truncate(i.body, length: 1500) %></p>
+                      <h5>By <%= link_to i.user.first_name %></h5>
+                      <br>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+              Join
+              <% end %>
+              <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+              Like
+              <% end %>
+
+              <div class="join_like">
+                Members: <%= rand(5..20) %> | Likes: <%= rand(1..42) %>
+              </div>
+            </div>
+          </div>
         <hr>
       <% end %>

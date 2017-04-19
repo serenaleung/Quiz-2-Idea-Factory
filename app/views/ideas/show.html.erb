@@ -38,7 +38,7 @@
   <p><%= r.body %></p>
   <p>By <%= r.user.first_name %></p>
   <%= link_to(
-  'Delete', idea_reviews_path(@idea, @reviews), method: :delete, data: {confirm: 'Are you sure?'}
+  'Delete', idea_review_path(@idea, r), method: :delete, data: {confirm: 'Are you sure?'}
   ) %>
 
   <hr />
