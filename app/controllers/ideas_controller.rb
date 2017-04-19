@@ -20,13 +20,16 @@ class IdeasController < ApplicationController
 
 
   def create
-      idea_params = params.require(:idea).permit([:title, :body, :name])
+      idea_params = params.require(:idea).permit([:title, :body])
       @idea = Idea.new idea_params
       @idea.user = current_user
+      @user_id = user.id
 
       if @idea.save
+        flash[:notice] = "Idea created"
         redirect_to idea_path(@idea)
       else
+        flash[:alert] = "Idea not created"
         render :new
       end
   end
@@ -41,7 +44,7 @@ class IdeasController < ApplicationController
 
   def update
     @idea = Idea.find(params[:id])
-    idea_params = params.require(:idea).permit([:title, :body, :name])
+    idea_params = params.require(:idea).permit([:title, :body])
 
     if !(can? :edit, @idea)
       redirect_to root_path, alert: 'Cannot update idea; access denied'

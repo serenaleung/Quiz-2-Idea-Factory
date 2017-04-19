@@ -27,7 +27,7 @@ puts "Users Created"
 
     )
   end
-  puts "Comments Created"
+  puts "Ideas Created"
 
   ideas = Idea.all
   ideas.each do |i|
