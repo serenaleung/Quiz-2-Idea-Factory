@@ -23,7 +23,7 @@ class IdeasController < ApplicationController
       idea_params = params.require(:idea).permit([:title, :body])
       @idea = Idea.new idea_params
       @idea.user = current_user
-      @user_id = user.id
+    
 
       if @idea.save
         flash[:notice] = "Idea created"

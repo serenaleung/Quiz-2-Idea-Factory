@@ -31,6 +31,11 @@ def can_edit_idea?(idea)
 end
 helper_method :can_edit_idea?
 
+# def can_edit_review?(review)
+#   user_signed_in? && (review.user == current_user)
+# end
+# helper_method :can_edit_review?
+
 def index
   @clicks = Click.sum
  end

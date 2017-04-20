@@ -20,6 +20,12 @@ class Ability
     can [:edit, :destroy], Idea do |idea|
       idea.user == user
     end
+    
+    can [:edit, :destroy], Review do |review|
+      review.user == user
+    end
+
+    # can :destroy, Review, user_id: user.id
 
     # OR
     # `user_id` is inside the `questions` table and `user` is either the signed

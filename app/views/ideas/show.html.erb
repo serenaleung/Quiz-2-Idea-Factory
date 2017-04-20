@@ -37,9 +37,14 @@
 <% @idea.reviews.each do |r| %>
   <p><%= r.body %></p>
   <p>By <%= r.user.first_name %></p>
-  <%= link_to(
-  'Delete', idea_review_path(@idea, r), method: :delete, data: {confirm: 'Are you sure?'}
-  ) %>
+
+<% if can? :destroy, r %>
+<%# if can_edit_review?(@review) %>
+  <%= link_to 'Delete', idea_review_path(@idea, r),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %>
+<% end %>
+
 
   <hr />
 <% end %>
