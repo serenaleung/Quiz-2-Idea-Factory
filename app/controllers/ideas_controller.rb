@@ -5,6 +5,7 @@ class IdeasController < ApplicationController
 
   def index
     @ideas = Idea.all
+    @idea = Idea.new
   end
 
   def new
@@ -23,7 +24,7 @@ class IdeasController < ApplicationController
       idea_params = params.require(:idea).permit([:title, :body])
       @idea = Idea.new idea_params
       @idea.user = current_user
-    
+
 
       if @idea.save
         flash[:notice] = "Idea created"

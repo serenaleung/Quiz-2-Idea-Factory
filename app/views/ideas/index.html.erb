@@ -1,44 +1,126 @@
-<h1>Ideas Generator</h1>
-<% @ideas.each do |i| %>
-          <div class="row">
-            <div class="col-md-10">
-              <h2><%= link_to i.title, i, { class: 'myModal' } %> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">+</button></h2>
+<br>
+    <div class="row container-fluid">
+      <div class="col-md-10">
+        <h1 class="indexTitle">Ideas Generator</h1>
+        <br>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-default newIdeaBtn" data-toggle="modal" data-target="#newModal" ><%= link_to('New Idea', new_idea_path) %></button>
+      </div>
+    </div>
 
-              <!-- Modal -->
-              <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
+    <div id="newModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
 
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Modal Header</h4>
-                    </div>
-                    <div class="modal-body">
-                      <p><%= truncate(i.body, length: 1500) %></p>
-                      <h5>By <%= link_to i.user.first_name %></h5>
-                      <br>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">New Idea</h4>
+          </div>
+          <div class="modal-body">
+            <%= @idea.errors.full_messages.join(', ') %>
+            <%= form_for @idea do |f| %>
+            <div class="form-group">
+              <%= f.label :title %>
+              <%= f.text_field :title, { class: 'form-control' }%>
+            </div>
+            <div class="form-group">
+              <%= f.label :body %>
+              <%= f.text_area :body, { class: 'form-control' }%>
+            </div>
+
+            <!-- <%= f.submit %> -->
+            <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+            Create Idea
+            <% end %>
+          <% end %>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <% @ideas.each do |i| %>
+              <div class="row">
+                <div class="col-md-10">
+
+                        <div class="idea-title">
+                        <h3 style="margin-top:0"><%=link_to i.title, i %> </h3>
+                        <div class="idea-body"><p><%= i.body %></p><h5>By <%= link_to i.user.first_name %></h5></div>
+                        </div>
 
                 </div>
-              </div>
-            </div>
-            <div class="col-md-2">
-              <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-              Join
-              <% end %>
-              <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-              Like
-              <% end %>
+                <div class="col-md-2">
+                  <span class="glyphicon glyphicon-plus" div="#joined" aria-hidden="true"></span> &nbsp;
+                  <span class="glyphicon glyphicon-thumbs-up" div="#liked" aria-hidden="true"></span>
 
-              <div class="join_like">
-                Members: <%= rand(5..20) %> | Likes: <%= rand(1..42) %>
+                  <a><i class="fa fa-plus" id="joined" aria-hidden="true"></i></a>
+                  <a><i class="fa fa-thumbs-o-up" id="liked" aria-hidden="true"></i></a>
+                  <%#= button_tag(type: 'submit', class: "btn btn-primary") do %>
+                  <!-- Join -->
+                  <%# end %>
+                  <%#= button_tag(type: 'submit', class: "btn btn-primary") do %>
+                  <!-- Like -->
+                  <%# end %>
+
+                  <div class="join_like">
+                    Members: <%= rand(5..20) %> | Likes: <%= rand(1..42) %>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        <hr>
-      <% end %>
+            <hr>
+          <% end %>
+
+<script>
+var click = false;
+    $(document).on('click', '.glyphicon-plus', function(){
+    	if($(this).hasClass('clicked')){
+      	$(this).removeClass('clicked');
+        click = false;
+        return false;
+      }
+    	if(!click){
+      	$(this).find("i").removeClass('red');
+      	 $(this).addClass('clicked');
+         click = true;
+      }else{
+      	$(this).find("i").toggleClass('red');
+      }
+    });
+
+var click = false;
+    $(document).on('click', '.glyphicon-thumbs-up', function(){
+    	if($(this).hasClass('clicked')){
+      	$(this).removeClass('clicked');
+        click = false;
+        return false;
+      }
+    	if(!click){
+      	$(this).find("i").removeClass('red');
+      	 $(this).addClass('clicked');
+         click = true;
+      }else{
+      	$(this).find("i").toggleClass('red');
+      }
+    });
+
+// $(function() {
+//      $(‘a’).click(function() {
+//          $(this).find(‘#liked’).toggleClass(‘fa-thumbs-up fa-thumbs-o-up’);
+//      });
+//  });
+//  $(function() {
+//      $(‘a’).click(function() {
+//          $(this).find(‘#joined’).toggleClass(‘fa-plus fa-minus’);
+//      });
+//  });
+
+
+</script>
