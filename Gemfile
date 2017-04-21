@@ -37,7 +37,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'rails-erd'
 gem 'rspec-rails', '~>3.5'
 gem 'rails-controller-testing'
-gem 'font-awesome-sass', '~> 4.7.0'
+gem "font-awesome-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

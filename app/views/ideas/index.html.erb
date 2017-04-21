@@ -61,8 +61,8 @@
                   <span class="glyphicon glyphicon-plus" div="#joined" aria-hidden="true"></span> &nbsp;
                   <span class="glyphicon glyphicon-thumbs-up" div="#liked" aria-hidden="true"></span>
 
-                  <a><i class="fa fa-plus" id="joined" aria-hidden="true"></i></a>
-                  <a><i class="fa fa-thumbs-o-up" id="liked" aria-hidden="true"></i></a>
+                  <!-- <a><i class="fa fa-plus fa-3x" id="joined" aria-hidden="true"></i></a>
+                  <a><i class="fa fa-thumbs-o-up fa-3x" id="liked" aria-hidden="true"></i></a> -->
                   <%#= button_tag(type: 'submit', class: "btn btn-primary") do %>
                   <!-- Join -->
                   <%# end %>
@@ -79,46 +79,23 @@
           <% end %>
 
 <script>
-var click = false;
-    $(document).on('click', '.glyphicon-plus', function(){
-    	if($(this).hasClass('clicked')){
-      	$(this).removeClass('clicked');
-        click = false;
-        return false;
-      }
-    	if(!click){
-      	$(this).find("i").removeClass('red');
-      	 $(this).addClass('clicked');
-         click = true;
-      }else{
-      	$(this).find("i").toggleClass('red');
-      }
-    });
 
-var click = false;
-    $(document).on('click', '.glyphicon-thumbs-up', function(){
-    	if($(this).hasClass('clicked')){
-      	$(this).removeClass('clicked');
-        click = false;
-        return false;
-      }
-    	if(!click){
-      	$(this).find("i").removeClass('red');
-      	 $(this).addClass('clicked');
-         click = true;
-      }else{
-      	$(this).find("i").toggleClass('red');
-      }
-    });
+$( ".glyphicon-plus" ).click(function() {
+  $( this ).toggleClass( "clicked" );
+});
+
+$( ".glyphicon-thumbs-up" ).click(function() {
+  $( this ).toggleClass( "clicked" );
+});
 
 // $(function() {
-//      $(‘a’).click(function() {
-//          $(this).find(‘#liked’).toggleClass(‘fa-thumbs-up fa-thumbs-o-up’);
+//      $('a').click(function() {
+//          $(this).find('#liked').toggleClass('fa-thumbs-up fa-thumbs-o-up');
 //      });
 //  });
 //  $(function() {
-//      $(‘a’).click(function() {
-//          $(this).find(‘#joined’).toggleClass(‘fa-plus fa-minus’);
+//      $('a').click(function() {
+//          $(this).find('#joined').toggleClass('fa-plus fa-minus');
 //      });
 //  });
 
