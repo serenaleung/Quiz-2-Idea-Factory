@@ -1,25 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Quiz 2
 
-Things you may want to cover:
+Admin
+s@e.com
+123
 
-* Ruby version
+Admin
+s@e.com
+123
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+User
+hazel_kub@leffler.org
+123
 
 * ...
 # Quiz-2-Idea-Factory
